@@ -3,6 +3,7 @@ package main
 import (
 	"log"
 	"os"
+	"strings"
 
 	"GO-RELOADED/processor"
 )
@@ -19,10 +20,13 @@ func main() {
 		log.Fatal(err)
 	}
 
-	res := processor.Process(string(b))
+	// feed processor with lines
+	lines := strings.Split(string(b), "\n")
+	resLines := processor.Process(lines)
 
+	// join result and write
+	res := strings.Join(resLines, "\n")
 	if err := os.WriteFile(out, []byte(res), 0o644); err != nil {
 		log.Fatal(err)
 	}
 }
-a
