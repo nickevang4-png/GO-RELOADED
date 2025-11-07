@@ -1,32 +1,27 @@
 package main
 
 import (
-	"fmt"
 	"log"
 	"os"
 
-	"GO-RELOADED/internal/textops"
-	"GO-RELOADED/internal/utils"
+	"GO-RELOADED/processor"
 )
 
 func main() {
 	if len(os.Args) != 3 {
-		log.Fatal("Usage: go-reloaded <input_file> <output_file>")
+		log.Fatalf("usage: %s <input> <output>", os.Args[0])
 	}
+	in := os.Args[1]
+	out := os.Args[2]
 
-	inputPath := os.Args[1]
-	outputPath := os.Args[2]
-
-	content, err := utils.ReadFile(inputPath)
+	b, err := os.ReadFile(in)
 	if err != nil {
 		log.Fatal(err)
 	}
 
-	result := textops.Process(content)
+	res := processor.Process(string(b))
 
-	if err := utils.WriteFile(outputPath, result); err != nil {
+	if err := os.WriteFile(out, []byte(res), 0o644); err != nil {
 		log.Fatal(err)
 	}
-
-	fmt.Println("✅ File processed and saved to:", outputPath)
 }
