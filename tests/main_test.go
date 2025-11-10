@@ -1,8 +1,9 @@
 package tests
 
 import (
-	"GO-RELOADED/internal/textops"
 	"testing"
+
+	"GO-RELOADED/internal/textops"
 )
 
 func TestHexConversion(t *testing.T) {
@@ -13,3 +14,5 @@ func TestHexConversion(t *testing.T) {
 		t.Errorf("Expected '%s', got '%s'", expected, output)
 	}
 }
+
+// main go
